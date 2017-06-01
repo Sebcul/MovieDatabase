@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Movie database";
+}
+
+    <div class="container">
+        <ul>
+            @foreach (var movie in Model)
+            {
+                <li>@movie.Title</li>
+            }
+        </ul>
+</div>
