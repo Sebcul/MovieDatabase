@@ -23,6 +23,10 @@ namespace MovieDatabase.Controllers
 
         public IActionResult SearchMovie(string searchText)
         {
+            if (String.IsNullOrEmpty(searchText))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var movies = _movieRepository.GetAllMovies().Where(m => m.Title.Contains(searchText));
             return View("SearchResult", movies);
         }

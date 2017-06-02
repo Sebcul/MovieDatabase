@@ -6,8 +6,9 @@
     <div class="container">
         <ul>
             @foreach (var movie in Model)
-            {
-                <li>@movie.Title</li>
+            { 
+                <h3>@movie.Title, @movie.ProductionYear</h3>
+                @movie.Director.Name
             }
         </ul>
 </div>

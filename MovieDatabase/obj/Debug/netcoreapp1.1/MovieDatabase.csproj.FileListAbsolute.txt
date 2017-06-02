@@ -7,3 +7,12 @@ C:\Users\Baste\OneDrive\ITHS\Utveckling av webbapplikationer\Labb 3\MovieDatabas
 C:\Users\Baste\OneDrive\ITHS\Utveckling av webbapplikationer\Labb 3\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.dll
 C:\Users\Baste\OneDrive\ITHS\Utveckling av webbapplikationer\Labb 3\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.pdb
 C:\Users\Baste\OneDrive\ITHS\Utveckling av webbapplikationer\Labb 3\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.csprojResolveAssemblyReference.cache
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.deps.json
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.runtimeconfig.json
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.runtimeconfig.dev.json
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.dll
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.pdb
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.csprojResolveAssemblyReference.cache
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.AssemblyInfo.cs
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.dll
+C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.pdb
