@@ -16,3 +16,12 @@ C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieD
 C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.AssemblyInfo.cs
 C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.dll
 C:\Users\cullb\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.pdb
+D:\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.deps.json
+D:\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.runtimeconfig.json
+D:\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.runtimeconfig.dev.json
+D:\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.dll
+D:\Github\MovieDatabase\MovieDatabase\bin\Debug\netcoreapp1.1\MovieDatabase.pdb
+D:\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.csprojResolveAssemblyReference.cache
+D:\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.AssemblyInfo.cs
+D:\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.dll
+D:\Github\MovieDatabase\MovieDatabase\obj\Debug\netcoreapp1.1\MovieDatabase.pdb

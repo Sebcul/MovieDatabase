@@ -24,9 +24,22 @@ namespace MovieDatabase.Repositories
             .ThenInclude(a => a.Actor);
         }
 
+        public Movie GetMovieById(int id)
+        {
+            return _dbContext.Movies.Include(d => d.Director)
+                .Include(r => r.Ratings)
+                .Include(ma => ma.MovieActors)
+                .ThenInclude(a => a.Actor).First(m => m.Id == id);
+        }
+
         public void AddMovie(Movie movie)
         {
             _dbContext.Movies.Add(movie);
+        }
+
+        public void SaveData()
+        {
+            _dbContext.SaveChanges();
         }
     }
 }

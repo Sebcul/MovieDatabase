@@ -1,0 +1,32 @@
+﻿@model AddMovieViewModel
+<head>
+    <style>
+        </style>
+</head>
+<div class="container margintop25">
+    
+    @using (Html.BeginForm("AddMovie", "Movie"))
+    {
+        @Html.ValidationSummary()
+        <div>
+            @Html.LabelFor(m => m.Title)<br />
+            @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.ProductionYear)<br />
+            @Html.EditorFor(m => m.ProductionYear, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.DirectorName)<br />
+            @Html.EditorFor(m => m.DirectorName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.DirectorDoB)<br/>
+            @Html.EditorFor(m => m.DirectorDoB, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div>
+            <input type="submit" value="Save" class="btn btn-default margintop25 marginbottom25"/>
+        </div>
+
+    }
+</div>

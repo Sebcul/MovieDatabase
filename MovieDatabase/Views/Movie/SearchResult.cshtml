@@ -2,13 +2,11 @@
 @{
     ViewData["Title"] = "Movie database";
 }
+<h2>Found the following movies</h2>
+<div class="container movielistbox">
 
-    <div class="container">
-        <ul>
-            @foreach (var movie in Model)
-            { 
-                <h3>@movie.Title, @movie.ProductionYear</h3>
-                @movie.Director.Name
-            }
-        </ul>
+    @foreach (var movie in Model)
+    {
+        <a href="@Url.Action("MovieDetails", new { id = movie.Id })"><h4>@movie.Title</h4></a>
+    }
 </div>

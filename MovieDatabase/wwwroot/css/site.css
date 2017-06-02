@@ -125,3 +125,29 @@ textarea {
         background-color: #3e3e3a;
     }
 }
+
+.movielistbox {
+    margin: 30px 0 25px 0;
+}
+
+td {
+    padding-right: 30px;
+    width: 13em;
+    overflow-wrap: break-word;
+}
+
+.reviewendmargin {
+    margin-bottom: 15px;
+}
+
+.marginbottom25 {
+    margin-bottom: 25px;
+}
+
+.margintop25 {
+    margin-top: 25px;
+}
+
+.underline {
+    text-decoration: underline;
+}

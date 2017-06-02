@@ -1,0 +1,32 @@
+﻿@model MovieViewModel
+
+<div class="container">
+    <ul class="nav marginbottom25">
+        <h2>@Model.Title, @Model.ProductionYear</h2>
+        <br />
+        <h4 class="underline">Director</h4>
+        <li>@Model.Director.Name</li>
+        <h4 class="underline">Actors</h4>
+        @foreach (var actor in Model.Actors)
+        {
+            <li>@actor.Name</li>
+        }
+    </ul>
+
+        <h4 class="underline">Ratings</h4>
+        @foreach (var rating in Model.Ratings)
+        {
+            <table class="reviewendmargin">
+                <tr><td><h5 class="underline"><b>@rating.ReviewerName</b></h5></td></tr>
+                <tr>
+                    <td>@rating.ReviewDate.ToString("yyyy-MM-dd")</td>
+                    <td>Rating: @rating.Score/10</td>
+                </tr>
+                <tr>
+                    <td colspan="2">@rating.Review</td>
+                </tr>
+            </table>
+
+        }
+
+</div>
