@@ -10357,15 +10357,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Baste\\.nuget\\packages\\": {}
+    "C:\\Users\\cullb\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Github\\MovieDatabase\\MovieDatabase\\MovieDatabase.csproj",
+      "projectUniqueName": "C:\\Users\\cullb\\Github\\MovieDatabase\\MovieDatabase\\MovieDatabase.csproj",
       "projectName": "MovieDatabase",
-      "projectPath": "D:\\Github\\MovieDatabase\\MovieDatabase\\MovieDatabase.csproj",
-      "outputPath": "D:\\Github\\MovieDatabase\\MovieDatabase\\obj\\",
+      "projectPath": "C:\\Users\\cullb\\Github\\MovieDatabase\\MovieDatabase\\MovieDatabase.csproj",
+      "outputPath": "C:\\Users\\cullb\\Github\\MovieDatabase\\MovieDatabase\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

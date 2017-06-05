@@ -34,7 +34,17 @@ namespace MovieDatabase.Repositories
 
         public void AddMovie(Movie movie)
         {
+            movie.Director = DirectorExists(movie.Director);
             _dbContext.Movies.Add(movie);
+        }
+
+        private Director DirectorExists(Director director)
+        {
+            var directorInDb =
+                _dbContext.Directors.First(d => d.Name.ToLower() == director.Name.ToLower() 
+                && d.DateOfBirth == director.DateOfBirth);
+
+            return directorInDb ?? director;
         }
 
         public void SaveData()

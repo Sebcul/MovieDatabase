@@ -9,6 +9,6 @@ namespace MovieDatabase.Repositories
     public interface IActorRepository
     {
         IEnumerable<Actor> GetAllActors();
-        void AddActor(Actor actor);
+        void AddActorToMovie(Actor actor, Movie movie);
     }
 }

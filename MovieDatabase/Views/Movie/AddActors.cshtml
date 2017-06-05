@@ -1,8 +1,27 @@
-﻿        <div id="strings">
-    <input type="text" name="allStrings[0]" />
-    <input type="text" name="allStrings[1]" />
-</div>
-<div id="newstring" style="display:none;">
-    <input type="text" name="allStrings[#]" />
-</div>
-<button type="button" id="addstring">Add</button>
+﻿@model AddActorViewModel
+<h3>@ViewBag.StatusMessage</h3>
+@using (Html.BeginForm("AddActors", "Movie"))
+{
+    <div>@Html.ValidationSummary()</div>
+    <div>
+        <table>
+            <tr>
+                <td>@Html.LabelFor(m => m.Movies)</td>
+                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies, "All movies")</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ActorName)</td>
+                <td>@Html.EditorFor(m => m.ActorName, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ActorDateOfBirth)</td>
+                <td>@Html.EditorFor(m => m.ActorDateOfBirth, new {htmlAttributes = new {@class = "form-control"}})</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Add" class="btn btn-default marginbottom25"/></td>
+            </tr>
+        </table>
+
+    </div>
+}
