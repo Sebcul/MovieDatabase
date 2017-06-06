@@ -1,0 +1,27 @@
+﻿@model AddRatingViewModel
+
+@using (Html.BeginForm("AddRating", "Movie", FormMethod.Post))
+{
+    <div>@Html.ValidationSummary()</div>
+    <div>
+        <table>
+            <tr>
+                <td>@Html.LabelFor(m => m.Movies)</td>
+                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.ReviewerName)</td>
+                <td>@Html.EditorFor(m => m.ReviewerName, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.Score)</td>
+                <td>@Html.DropDownListFor(n => n.Score, Model.ScoreList)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Add" class="btn btn-default marginbottom25" /></td>
+            </tr>
+        </table>
+
+    </div>
+}

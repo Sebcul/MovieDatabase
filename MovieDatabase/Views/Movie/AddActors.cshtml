@@ -1,5 +1,5 @@
 ﻿@model AddActorViewModel
-<h3>@ViewBag.StatusMessage</h3>
+
 @using (Html.BeginForm("AddActors", "Movie"))
 {
     <div>@Html.ValidationSummary()</div>
@@ -7,7 +7,7 @@
         <table>
             <tr>
                 <td>@Html.LabelFor(m => m.Movies)</td>
-                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies, "All movies")</td>
+                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
             </tr>
             <tr>
                 <td>@Html.LabelFor(m => m.ActorName)</td>

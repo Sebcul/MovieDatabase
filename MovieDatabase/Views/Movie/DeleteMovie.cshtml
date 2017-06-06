@@ -1,0 +1,19 @@
+﻿@model DeleteMovieViewModel
+@using (Html.BeginForm("DeleteMovie", "Movie", FormMethod.Post, new { onsubmit = "return ValidateDelete();" }))
+{
+    <div>@Html.ValidationSummary()</div>
+    <div>
+        <table>
+            <tr>
+                <td>@Html.LabelFor(m => m.Movies)</td>
+                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Delete" class="btn btn-default marginbottom25" /></td>
+               
+            </tr>
+        </table>
+
+    </div>
+}

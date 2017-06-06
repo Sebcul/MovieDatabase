@@ -43,9 +43,10 @@
                 <ul class="dropdown-menu">
                     <li><a asp-controller="Movie" asp-action="AddMovie">Add movie</a></li>
                     <li><a asp-controller="Movie" asp-action="AddActors">Add actors</a></li>
-
+                    <li><a asp-controller="Movie" asp-action="AddRating">Add rating</a></li>
+                    <li><a asp-controller="Movie" asp-action="DeleteMovie">Delete movie</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Recreate database</a></li>
+                    <li><a asp-controller="Movie" asp-action="ListAll">List all movies</a></li>
                 </ul>
             </li>
             <li class="dropdown">

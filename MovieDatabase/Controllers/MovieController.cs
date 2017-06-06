@@ -116,5 +116,61 @@ namespace MovieDatabase.Controllers
             }
             return RedirectToAction("AddActors");
         }
+
+        [HttpGet]
+        public IActionResult DeleteMovie()
+        {
+            var model = new DeleteMovieViewModel();
+
+            foreach (var movie in _movieRepository.GetAllMovies())
+            {
+                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteMovie(DeleteMovieViewModel viewModel)
+        {
+            _movieRepository.DeleteMovie(viewModel.SelectedMovieId);
+            _movieRepository.SaveData();
+
+            var model = new DeleteMovieViewModel();
+            foreach (var movie in _movieRepository.GetAllMovies())
+            {
+                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+            }
+            return RedirectToAction("DeleteMovie", model);
+        }
+
+        [HttpGet]
+        public IActionResult ListAll()
+        {
+            var model = _movieRepository.GetAllMovies();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddRating()
+        {
+            var model = new AddRatingViewModel();          
+
+            foreach (var movie in _movieRepository.GetAllMovies())
+            {
+                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+            }
+            return View(model);
+        }
+
+        //TODO: Add functionality to post method to add rating, some missing elements in view still
+        [HttpPost]
+        public IActionResult AddRating(AddRatingViewModel viewModel)
+        {
+
+
+            return View();
+        }
+
     }
 }

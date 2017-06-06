@@ -38,6 +38,11 @@ namespace MovieDatabase.Repositories
             _dbContext.Movies.Add(movie);
         }
 
+        public void DeleteMovie(int id)
+        {
+            _dbContext.Movies.Remove(GetMovieById(id));
+        }
+
         private Director DirectorExists(Director director)
         {
             var directorInDb =
