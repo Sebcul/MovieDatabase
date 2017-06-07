@@ -22,7 +22,7 @@ namespace MovieDatabase.Controllers
         [HttpGet]
         public IActionResult ListAll()
         {
-            var model =_actorRepository.GetAllActors();
+            var model = _actorRepository.GetAllActors();
             return View(model);
         }
 
@@ -40,6 +40,19 @@ namespace MovieDatabase.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ActorSearch()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult SearchActor(string searchText)
+        {
+            var model = _actorRepository.GetAllActors().Where(a => a.Name.ToLower().Contains(searchText.ToLower()));
+            return View("ActorSearch", model);
         }
     }
 }

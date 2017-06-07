@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Actor>
+
+
+<div class="paddingcenterize">
+    <h3 class="marginbottom25">Search actor</h3>
+    <form role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter actor name" name="searchText">
+        </div>
+        <button type="submit" class="btn btn-default" asp-controller="Actor" asp-action="SearchActor">Find</button>
+    </form>
+
+
+
+    @if (Model != null)
+    {
+        <h2 class="margintop25">Found the following actors</h2>
+        <div class="container movielistbox">
+            @foreach (var actor in Model)
+            {
+                <a href="@Url.Action("ActorDetails", new { id = actor.Id })"><h4>@actor.Name</h4></a>
+            }
+        </div>
+    }
+</div>
