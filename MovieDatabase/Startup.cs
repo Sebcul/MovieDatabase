@@ -33,10 +33,13 @@ namespace MovieDatabase
         }
 
         public IConfigurationRoot Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MovieDbContext>(options =>
-                options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(_configurationRoot.GetConnectionString("Server")));
+
+
 
             services.AddSingleton<IActorRepository, ActorRepository>();
             services.AddSingleton<IMovieRepository, MovieRepository>();
@@ -53,10 +56,6 @@ namespace MovieDatabase
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
 
             app.UseStaticFiles();
 
@@ -67,5 +66,6 @@ namespace MovieDatabase
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }
