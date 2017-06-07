@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Actor>
+
+<div class="margintop25">
+    @foreach (var actor in Model)
+    {
+        <a href="@Url.Action("ActorDetails", new { id = actor.Id })"><h4>@actor.Name</h4></a>
+    }
+</div>

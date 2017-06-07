@@ -1,0 +1,13 @@
+﻿@model ActorViewModel
+
+<div class="container">
+    <ul class="nav marginbottom25">
+        <h2>@Model.Name, @Model.DateOfBirth.ToString("d")</h2>
+        <br />
+        <h4 class="underline">Movies acted</h4>
+        @foreach (var movie in Model.Movies)
+        {
+            <li>@movie.Title, @movie.ProductionYear</li>
+        }
+    </ul>
+</div>

@@ -10,5 +10,7 @@ namespace MovieDatabase.Repositories
     {
         IEnumerable<Actor> GetAllActors();
         void AddActorToMovie(Actor actor, Movie movie);
+        IEnumerable<Movie> GetMoviesForActor(int id);
+        Actor GetActorById(int id);
     }
 }

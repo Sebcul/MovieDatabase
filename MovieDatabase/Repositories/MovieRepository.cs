@@ -38,6 +38,12 @@ namespace MovieDatabase.Repositories
             _dbContext.Movies.Add(movie);
         }
 
+        public void AddRating(Rating rating, int movieId)
+        {
+            var movie = GetMovieById(movieId);
+            movie.Ratings.Add(rating);
+        }
+
         public void DeleteMovie(int id)
         {
             _dbContext.Movies.Remove(GetMovieById(id));

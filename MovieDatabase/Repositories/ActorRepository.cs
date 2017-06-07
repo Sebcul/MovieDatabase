@@ -43,6 +43,21 @@ namespace MovieDatabase.Repositories
             });
         }
 
+        public IEnumerable<Movie> GetMoviesForActor(int id)
+        {
+            var movies = (from a in _dbContext.Actors
+                join ma in _dbContext.MovieActors on a.Id equals ma.ActorId
+                          where ma.ActorId == id
+                join m in _dbContext.Movies on ma.MovieId equals  m.Id
+                select m);
+            return movies;
+        }
+
+        public Actor GetActorById(int id)
+        {
+            return _dbContext.Actors.First(a => a.Id == id);
+        }
+
         private bool ActorExists(string name, DateTime dateOfBirth)
         {
             var actorInDb =

@@ -151,3 +151,15 @@ td {
 .underline {
     text-decoration: underline;
 }
+
+#ReviewText{
+    resize: none !important;
+}
+
+.trheightreview {
+    height: 40px;
+}
+
+.paddingcenterize {
+    padding: 50px 150px 0 150px
+}

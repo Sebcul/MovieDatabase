@@ -37,6 +37,7 @@ namespace MovieDatabase.ViewModels
         [Required]
         public int Score { get; set; }
 
+        [Display(Name = "Review")]
         [Required]
         public string ReviewText { get; set; }
     }

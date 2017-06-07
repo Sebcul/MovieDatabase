@@ -22,10 +22,6 @@ namespace MovieDatabase.Controllers
             _actorRepository = actorRepository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult SearchMovie(string searchText)
         {
@@ -124,7 +120,7 @@ namespace MovieDatabase.Controllers
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
             }
             return View(model);
         }
@@ -138,7 +134,7 @@ namespace MovieDatabase.Controllers
             var model = new DeleteMovieViewModel();
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
             }
             return RedirectToAction("DeleteMovie", model);
         }
@@ -154,23 +150,31 @@ namespace MovieDatabase.Controllers
         [HttpGet]
         public IActionResult AddRating()
         {
-            var model = new AddRatingViewModel();          
+            var model = new AddRatingViewModel();
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
             }
             return View(model);
         }
 
-        //TODO: Add functionality to post method to add rating, some missing elements in view still
         [HttpPost]
         public IActionResult AddRating(AddRatingViewModel viewModel)
         {
-
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                var rating = new Rating
+                {
+                    Review = viewModel.ReviewText,
+                    ReviewDate = DateTime.Now,
+                    ReviewerName = viewModel.ReviewerName,
+                    Score = viewModel.Score
+                };
+                _movieRepository.AddRating(rating, viewModel.SelectedMovieId);
+                _movieRepository.SaveData();
+            }
+            return RedirectToAction("MovieDetails", new {id = viewModel.SelectedMovieId});
         }
-
     }
 }
