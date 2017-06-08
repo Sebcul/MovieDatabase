@@ -16,5 +16,7 @@ namespace MovieDatabase.ViewModels
         public List<Actor> Actors{ get; set; }
         public int ProductionYear { get; set; }
         public List<Rating> Ratings { get; set; }
+        public double AverageScore { get; set; }
+        public IEnumerable<Genre> Genres { get; set; }
     }
 }

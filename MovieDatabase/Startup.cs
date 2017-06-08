@@ -42,6 +42,7 @@ namespace MovieDatabase
 
 
             services.AddSingleton<IActorRepository, ActorRepository>();
+            services.AddSingleton<IDirectorRepository, DirectorRepository>();
             services.AddSingleton<IMovieRepository, MovieRepository>();
             services.AddMvc();
         }

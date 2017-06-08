@@ -49,9 +49,9 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchActor(string searchText)
+        public IActionResult SearchActor(string s)
         {
-            var model = _actorRepository.GetAllActors().Where(a => a.Name.ToLower().Contains(searchText.ToLower()));
+            var model = _actorRepository.GetAllActors().Where(a => a.Name.ToLower().Contains(s.ToLower()));
             return View("ActorSearch", model);
         }
     }

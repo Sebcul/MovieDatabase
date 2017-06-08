@@ -10,6 +10,7 @@ using MovieDatabase.ViewModels;
 
 namespace MovieDatabase.Controllers
 {
+    //TODO: Check if AverageScore is null in moviedetails view. Add toplist view
     public class MovieController : Controller
     {
         private readonly IMovieRepository _movieRepository;
@@ -23,13 +24,13 @@ namespace MovieDatabase.Controllers
         }
 
 
-        public IActionResult SearchMovie(string searchText)
+        public IActionResult SearchMovie(string s)
         {
-            if (String.IsNullOrEmpty(searchText))
+            if (String.IsNullOrEmpty(s))
             {
                 return RedirectToAction("Index", "Home");
             }
-            var movies = _movieRepository.GetAllMovies().Where(m => m.Title.ToLower().Contains(searchText.ToLower()));
+            var movies = _movieRepository.GetAllMovies().Where(m => m.Title.ToLower().Contains(s.ToLower()));
             return View("SearchResult", movies);
         }
 
@@ -48,7 +49,9 @@ namespace MovieDatabase.Controllers
                 ProductionYear = movie.ProductionYear,
                 Title = movie.Title,
                 Actors = actors,
-                Ratings = movie.Ratings.ToList()
+                Ratings = movie.Ratings.ToList(),
+                AverageScore = movie.AverageScore,
+                Genres = movie.Genres
             };
             return View(model);
         }
@@ -56,7 +59,10 @@ namespace MovieDatabase.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
-            return View();
+            var model = new AddMovieViewModel();
+            model.DirectorDoB = null;
+            model.ProductionYear = null;
+            return View(model);
         }
 
         [HttpPost]
@@ -66,10 +72,12 @@ namespace MovieDatabase.Controllers
             {
                 var movie = new Movie
                 {
-                    Director = new Director {DateOfBirth = model.DirectorDoB, Name = model.DirectorName},
+                    Director = new Director {DateOfBirth = Convert.ToDateTime(model.DirectorDoB), Name = model.DirectorName},
                     Title = model.Title,
-                    ProductionYear = model.ProductionYear
+                    ProductionYear = Convert.ToInt32(model.ProductionYear)
                 };
+                var genre = _movieRepository.CheckDbIfGenreExists(new Genre { GenreName = model.SelectedGenre });
+                movie.Genres.Add(genre);
                 _movieRepository.AddMovie(movie);
                 _movieRepository.SaveData();
                 return RedirectToAction("MovieDetails", new {id = movie.Id});
@@ -175,6 +183,13 @@ namespace MovieDatabase.Controllers
                 _movieRepository.SaveData();
             }
             return RedirectToAction("MovieDetails", new {id = viewModel.SelectedMovieId});
+        }
+
+        [HttpGet]
+        public IActionResult TopList()
+        {
+            var model = _movieRepository.GetTopListMovies();
+            return View(model);
         }
     }
 }

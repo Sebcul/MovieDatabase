@@ -8,9 +8,10 @@ using MovieDatabase.Models;
 namespace MovieDatabase.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    partial class MovieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170608115809_MovieAverageScore")]
+    partial class MovieAverageScore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -42,22 +43,6 @@ namespace MovieDatabase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Directors");
-                });
-
-            modelBuilder.Entity("MovieDatabase.Models.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("GenreName");
-
-                    b.Property<int>("MovieId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("MovieDatabase.Models.Movie", b =>
@@ -111,14 +96,6 @@ namespace MovieDatabase.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("MovieDatabase.Models.Genre", b =>
-                {
-                    b.HasOne("MovieDatabase.Models.Movie", "Movie")
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MovieDatabase.Models.Movie", b =>

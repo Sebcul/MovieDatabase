@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Director>
+
+<div class="margintop25">
+    @foreach (var director in Model)
+    {
+        <a href="@Url.Action("DirectorDetails", new { id = director.Id })"><h4>@director.Name</h4></a>
+    }
+</div>

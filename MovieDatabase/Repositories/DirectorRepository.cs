@@ -4,7 +4,7 @@ using MovieDatabase.Models;
 
 namespace MovieDatabase.Repositories
 {
-    public class DirectorRepository
+    public class DirectorRepository : IDirectorRepository
     {
         private readonly MovieDbContext _dbContext;
 
@@ -26,5 +26,7 @@ namespace MovieDatabase.Repositories
         {
             return _dbContext.Directors.First(a => a.Id == id);
         }
+
+
     }
 }

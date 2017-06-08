@@ -19,7 +19,7 @@ namespace MovieDatabase.Repositories
         public IEnumerable<Movie> GetAllMovies()
         {
             return _dbContext.Movies.Include(d => d.Director)
-                .Include(r => r.Ratings)
+                .Include(r => r.Ratings).Include(g => g.Genres)
             .Include(ma => ma.MovieActors)
             .ThenInclude(a => a.Actor);
         }
@@ -27,16 +27,17 @@ namespace MovieDatabase.Repositories
         public Movie GetMovieById(int id)
         {
             return _dbContext.Movies.Include(d => d.Director)
-                .Include(r => r.Ratings)
+                .Include(r => r.Ratings).Include(g => g.Genres)
                 .Include(ma => ma.MovieActors)
                 .ThenInclude(a => a.Actor).First(m => m.Id == id);
         }
 
         public void AddMovie(Movie movie)
         {
-            movie.Director = DirectorExists(movie.Director);
+            movie.Director = CheckDbIfDirectorExists(movie.Director);
             _dbContext.Movies.Add(movie);
         }
+
 
         public void AddRating(Rating rating, int movieId)
         {
@@ -44,18 +45,40 @@ namespace MovieDatabase.Repositories
             movie.Ratings.Add(rating);
         }
 
+        public void AddGenre(Genre genre, int movieId)
+        {
+            genre = CheckDbIfGenreExists(genre);
+
+            var movie = GetMovieById(movieId);
+
+            movie.Genres.Add(genre);
+        }
+
         public void DeleteMovie(int id)
         {
             _dbContext.Movies.Remove(GetMovieById(id));
         }
 
-        private Director DirectorExists(Director director)
+        public IEnumerable<Movie> GetTopListMovies()
+        {
+            var movies = _dbContext.Movies.Include(r => r.Ratings).Where(m => m.AverageScore > 0).OrderByDescending(m => m.AverageScore).ToList();
+            return movies;
+        }
+
+        private Director CheckDbIfDirectorExists(Director director)
         {
             var directorInDb =
-                _dbContext.Directors.First(d => d.Name.ToLower() == director.Name.ToLower() 
+                _dbContext.Directors.FirstOrDefault(d => d.Name.ToLower() == director.Name.ToLower() 
                 && d.DateOfBirth == director.DateOfBirth);
 
             return directorInDb ?? director;
+        }
+
+        public Genre CheckDbIfGenreExists(Genre genre)
+        {
+            var genreInDb = _dbContext.Genres.FirstOrDefault(g => g.GenreName == genre.GenreName);
+
+            return genreInDb ?? genre;
         }
 
         public void SaveData()

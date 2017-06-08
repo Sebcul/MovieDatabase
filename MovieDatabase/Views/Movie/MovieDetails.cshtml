@@ -2,8 +2,17 @@
 
 <div class="container">
     <ul class="nav marginbottom25">
-        <h2>@Model.Title, @Model.ProductionYear</h2>
-        <br />
+        <h2>@Model.Title (@Model.ProductionYear) <img src="~/images/star.png" class="marginleft25" width="33" height="33" /> @Model.AverageScore</h2> 
+        <h3>
+            @foreach (var genre in Model.Genres)
+            {
+                @genre.GenreName;
+                if (Model.Genres.Count() > 1)
+                {
+                    <span>|</span>
+                }
+            }
+        </h3>
         <h4 class="underline">Director</h4>
         <li>@Model.Director.Name</li>
         <h4 class="underline">Actors</h4>
