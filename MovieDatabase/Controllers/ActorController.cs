@@ -11,12 +11,10 @@ namespace MovieDatabase.Controllers
     public class ActorController : Controller
     {
         private readonly IActorRepository _actorRepository;
-        private readonly IMovieRepository _movieRepository;
 
         public ActorController(IActorRepository actorRepository, IMovieRepository movieRepository)
         {
             _actorRepository = actorRepository;
-            _movieRepository = movieRepository;
         }
 
         [HttpGet]

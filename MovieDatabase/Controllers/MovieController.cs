@@ -10,7 +10,6 @@ using MovieDatabase.ViewModels;
 
 namespace MovieDatabase.Controllers
 {
-    //TODO: Check if AverageScore is null in moviedetails view. Add toplist view
     public class MovieController : Controller
     {
         private readonly IMovieRepository _movieRepository;
