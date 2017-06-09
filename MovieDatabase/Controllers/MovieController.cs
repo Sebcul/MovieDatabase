@@ -72,11 +72,15 @@ namespace MovieDatabase.Controllers
             {
                 var movie = new Movie
                 {
-                    Director = new Director {DateOfBirth = Convert.ToDateTime(model.DirectorDoB), Name = model.DirectorName},
+                    Director = new Director
+                    {
+                        DateOfBirth = Convert.ToDateTime(model.DirectorDoB),
+                        Name = model.DirectorName
+                    },
                     Title = model.Title,
                     ProductionYear = Convert.ToInt32(model.ProductionYear)
                 };
-                var genre = _movieRepository.CheckDbIfGenreExists(new Genre { GenreName = model.SelectedGenre });
+                var genre = _movieRepository.CheckDbIfGenreExists(new Genre {GenreName = model.SelectedGenre});
                 movie.Genres.Add(genre);
                 _movieRepository.AddMovie(movie);
                 _movieRepository.SaveData();
@@ -190,6 +194,27 @@ namespace MovieDatabase.Controllers
         {
             var model = _movieRepository.GetTopListMovies();
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddGenre()
+        {
+            var model = new AddGenreViewModel();
+
+            foreach (var movie in _movieRepository.GetAllMovies())
+            {
+                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddGenre(AddGenreViewModel viewModel)
+        {
+            _movieRepository.AddGenre(new Genre{ GenreName = viewModel.SelectedGenre},viewModel.SelectedMovieId );
+
+            return RedirectToAction("MovieDetails", new { id = viewModel.SelectedMovieId });
         }
     }
 }

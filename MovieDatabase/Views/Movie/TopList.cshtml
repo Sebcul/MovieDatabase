@@ -1,8 +1,31 @@
 ﻿@model IEnumerable<Movie>
+
 <h3>Movie top list</h3>
 <div class="margintop25">
-    @foreach (var movie in Model)
-    {
-        <a href="@Url.Action("MovieDetails", new { id = movie.Id })"><h4>@movie.AverageScore @movie.Title</h4></a>
-    }
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <table class="table table-bordered table-striped">
+                    <colgroup>
+                        <col class="col-md-1">
+                        <col class="col-md-5">
+                        <col class="col-md-2">
+                    </colgroup>
+                    <tbody>
+
+                        @for (int i = 0; i < @Model.Count(); i++)
+                        {
+                        <tr>
+                            <td class="col-xs-1">@(i + 1).</td>
+                            <td><a href="@Url.Action("MovieDetails", new {id = @Model.ElementAt(i).Id})"><h5>@Model.ElementAt(i).Title</h5></a></td>
+                    <td><img src="~/images/star.png" width="20" height="20" />@Model.ElementAt(i).AverageScore</td>
+                        </tr>
+                            }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

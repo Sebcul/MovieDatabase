@@ -87,7 +87,7 @@ textarea {
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
     color: #fbff05;
-    background-color: #3e3e3a;
+    background-color: grey;
 }
 .navbar-default .navbar-toggle {
     border-color: #3e3e3a;
@@ -148,6 +148,14 @@ td {
     margin-top: 25px;
 }
 
+.marginleft25 {
+    margin: 0 0 0 25px
+}
+
+.margin10updown {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .underline {
     text-decoration: underline;
 }
@@ -164,6 +172,14 @@ td {
     padding: 50px 150px 0 150px
 }
 
-.marginleft25 {
-    margin: 0 0 0 25px
+.nostyletd {
+    padding-right: 0 !important;
+    width: 0em !important;
+    max-width: 2px !important;
+    overflow-wrap: normal !important;
+    table-layout:fixed
+}
+
+.paddingright30 {
+    padding-right: 30px;
 }

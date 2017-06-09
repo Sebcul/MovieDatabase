@@ -50,6 +50,10 @@ namespace MovieDatabase.Repositories
             genre = CheckDbIfGenreExists(genre);
 
             var movie = GetMovieById(movieId);
+            if (IsGenreOnMovie(movie, genre.GenreName))
+            {
+                return;
+            }
 
             movie.Genres.Add(genre);
         }
@@ -79,6 +83,18 @@ namespace MovieDatabase.Repositories
             var genreInDb = _dbContext.Genres.FirstOrDefault(g => g.GenreName == genre.GenreName);
 
             return genreInDb ?? genre;
+        }
+
+        private bool IsGenreOnMovie(Movie movie, string genreName)
+        {
+            foreach (var genre in movie.Genres)
+            {
+                if (genre.GenreName.ToLower() == genreName.ToLower())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void SaveData()

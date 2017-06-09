@@ -40,18 +40,19 @@
         <ul class="nav navbar-nav">
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movies <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/movie.png" width="20" height="20"/> Movies <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a asp-controller="Movie" asp-action="AddMovie">Add movie</a></li>
                     <li><a asp-controller="Movie" asp-action="AddActors">Add actors</a></li>
-                    <li><a asp-controller="Movie" asp-action="AddRating">Add rating</a></li>
+                    <li><a asp-controller="Movie" asp-action="AddRating">Rate movie</a></li>
+                    <li><a asp-controller="Movie" asp-action="AddGenre">Add genre to movie</a></li>
                     <li><a asp-controller="Movie" asp-action="DeleteMovie">Delete movie</a></li>
                     <li class="divider"></li>
                     <li><a asp-controller="Movie" asp-action="ListAll">List all movies</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actors <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/actor.png" width="20" height="20" /> Actors <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a asp-controller="Actor" asp-action="ActorSearch">Search actor</a></li>
                     <li class="divider"></li>
@@ -59,7 +60,7 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Directors <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/director.png" width="20" height="20" /> Directors <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a asp-controller="Director" asp-action="DirectorSearch">Search director</a></li>
                     <li class="divider"></li>
@@ -73,6 +74,9 @@
             </div>
             <button type="submit" class="btn btn-default" asp-controller="Movie" asp-action="SearchMovie">Find</button>
         </form>
+        <ul class="nav navbar-nav navbar-right paddingright30">
+            <li><a asp-controller="Movie" asp-action="TopList"><img src="~/images/list.png" width="20" height="20" /> Top movies</a></li>
+        </ul>
     </div>
 </nav>
 
