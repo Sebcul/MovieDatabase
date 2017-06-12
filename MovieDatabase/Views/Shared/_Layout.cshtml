@@ -35,22 +35,9 @@
         <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" id="smallLogo" class="img-responsive center-block"/></a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/movie.png" width="20" height="20"/> Movies <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a asp-controller="Movie" asp-action="AddMovie">Add movie</a></li>
-                    <li><a asp-controller="Movie" asp-action="AddActors">Add actors</a></li>
-                    <li><a asp-controller="Movie" asp-action="AddRating">Rate movie</a></li>
-                    <li><a asp-controller="Movie" asp-action="AddGenre">Add genre to movie</a></li>
-                    <li><a asp-controller="Movie" asp-action="DeleteMovie">Delete movie</a></li>
-                    <li class="divider"></li>
-                    <li><a asp-controller="Movie" asp-action="ListAll">List all movies</a></li>
-                </ul>
-            </li>
+            @await Html.PartialAsync("_MoviesPartial")
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/actor.png" width="20" height="20" /> Actors <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -67,7 +54,9 @@
                     <li><a asp-controller="Director" asp-action="ListAll">List all directors</a></li>
                 </ul>
             </li>
+            <li><a asp-controller="Movie" asp-action="TopList"><img src="~/images/list.png" width="20" height="20" /> Top movies</a></li>
         </ul>
+
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search movie" name="s">
@@ -75,7 +64,8 @@
             <button type="submit" class="btn btn-default" asp-controller="Movie" asp-action="SearchMovie">Find</button>
         </form>
         <ul class="nav navbar-nav navbar-right paddingright30">
-            <li><a asp-controller="Movie" asp-action="TopList"><img src="~/images/list.png" width="20" height="20" /> Top movies</a></li>
+
+            @await Html.PartialAsync("_LoginPartial")
         </ul>
     </div>
 </nav>

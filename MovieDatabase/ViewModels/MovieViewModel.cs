@@ -11,6 +11,7 @@ namespace MovieDatabase.ViewModels
 
     public class MovieViewModel
     {
+        public int? MovieId { get; set; }
         public string Title { get; set; }
         public Director Director { get; set; }
         public List<Actor> Actors{ get; set; }

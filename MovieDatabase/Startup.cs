@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MovieDatabase.Models;
 using MovieDatabase.Repositories;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MovieDatabase
 {
@@ -39,12 +40,15 @@ namespace MovieDatabase
             services.AddDbContext<MovieDbContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("Server")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<MovieDbContext>();
 
 
             services.AddSingleton<IActorRepository, ActorRepository>();
             services.AddSingleton<IDirectorRepository, DirectorRepository>();
             services.AddSingleton<IMovieRepository, MovieRepository>();
             services.AddMvc();
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -57,6 +61,8 @@ namespace MovieDatabase
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
+
+            app.UseIdentity();
 
             app.UseStaticFiles();
 

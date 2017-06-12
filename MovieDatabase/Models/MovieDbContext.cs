@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MovieDatabase.Models
 {
-    public class MovieDbContext : DbContext
+    public class MovieDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Director> Directors { get; set; }

@@ -28,6 +28,7 @@
     </ul>
 
     <h4 class="underline">Ratings</h4>
+
     @foreach (var rating in Model.Ratings)
     {
         <table class="reviewendmargin">
@@ -46,5 +47,7 @@
                 <td colspan="2">@rating.Review</td>
             </tr>
         </table>
+
     }
+    <h4 class="margintop25"><a href="@Url.Action("AddRating", new { id = Model.MovieId })">Add rating</a></h4>
 </div>

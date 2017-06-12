@@ -50,7 +50,8 @@ namespace MovieDatabase.Controllers
                 Actors = actors,
                 Ratings = movie.Ratings.ToList(),
                 AverageScore = movie.AverageScore,
-                Genres = movie.Genres
+                Genres = movie.Genres,
+                MovieId = movie.Id
             };
             return View(model);
         }
@@ -159,13 +160,30 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpGet]
+        public IActionResult AddRating(int? id)
+        {
+            var model = new AddRatingViewModel();
+
+            foreach (var movie in _movieRepository.GetAllMovies())
+            {
+
+                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
+            }
+            if (id != null)
+            {
+                model.SelectedMovieId = (int)id;
+            }
+            return View(model);
+        }
+
         public IActionResult AddRating()
         {
             var model = new AddRatingViewModel();
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
+
+                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
             }
             return View(model);
         }
