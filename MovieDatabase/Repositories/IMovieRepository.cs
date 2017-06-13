@@ -6,13 +6,15 @@ namespace MovieDatabase.Repositories
     public interface IMovieRepository
     {
         IEnumerable<Movie> GetAllMovies();
+        Movie GetMovieById(int id);
+        IEnumerable<Movie> GetTopListMovies();
+        Genre CheckDbIfGenreExists(Genre genre);
         void AddMovie(Movie movie);
         void AddRating(Rating rating, int movieId);
         void AddGenre(Genre genre, int movieId);
-        Genre CheckDbIfGenreExists(Genre genre);
         void DeleteMovie(int id);
-        Movie GetMovieById(int id);
-        IEnumerable<Movie> GetTopListMovies();
+        void UpdateMovie(Movie movie);
+        void RemoveRating(int ratingId, int movieId);
         void SaveData();
     }
 }

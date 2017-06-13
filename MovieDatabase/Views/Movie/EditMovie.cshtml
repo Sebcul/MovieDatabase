@@ -1,0 +1,63 @@
+﻿@model EditMovieViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{        
+    <input type="hidden" id="movieId" value="@Model.MovieId" />
+
+    <div class="margintop25 form-group-sm">
+        <h3>Title</h3>
+        <input type="text" value="@Model.Title" id="movieTitle" class="form-control"/>
+    </div>
+
+    <div>
+        <h3>Production Year</h3>
+        <input type="text" value="@Model.ProductionYear" id="movieProductionYear" class="form-control"/>
+    </div>
+
+    <div>
+        <h3>Actors</h3>
+        <select id="movieActors" name="movieActors">
+            @foreach (var actor in Model.Actors)
+            {
+                <option value="@actor.Id">@actor.Name</option>
+            }
+        </select>
+        <input type="button" id="removeActorButton" value="Remove" class="btn btn-default btn-sm"/>
+    </div>
+
+    <div class="margintop25">
+        @foreach (var rating in Model.Ratings)
+        {
+            <table class="reviewendmargin" id="reviewBox@(rating.Id)">
+                <tr>
+                    <td>
+                        <h5 class="underline">
+                            <b>@rating.ReviewerName</b>
+                        </h5>
+                    </td>
+                    <td>
+                        <input type="hidden" id="ratingId" value="@rating.Id" />
+                        <input type="button" data-id='@rating.Id' value="Remove" class="btn btn-default btn-sm removeRatingButton"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@rating.ReviewDate.ToString("yyyy-MM-dd")</td>
+                    <td>Rating: @rating.Score/10</td>
+                </tr>
+                <tr>
+                    <td colspan="2">@rating.Review</td>
+                </tr>
+            </table>
+        }
+    </div>
+
+    <div>
+        <input type="button" id="saveMovieButton" value="Save" class="btn btn-default"/>
+    </div>
+
+}

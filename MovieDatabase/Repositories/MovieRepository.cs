@@ -26,10 +26,12 @@ namespace MovieDatabase.Repositories
 
         public Movie GetMovieById(int id)
         {
-            return _dbContext.Movies.Include(d => d.Director)
-                .Include(r => r.Ratings).Include(g => g.Genres)
-                .Include(ma => ma.MovieActors)
-                .ThenInclude(a => a.Actor).First(m => m.Id == id);
+                return _dbContext.Movies.Include(d => d.Director)
+                    .Include(r => r.Ratings)
+                    .Include(g => g.Genres)
+                    .Include(ma => ma.MovieActors)
+                    .ThenInclude(a => a.Actor)
+                    .First(m => m.Id == id);
         }
 
         public void AddMovie(Movie movie)
@@ -67,6 +69,19 @@ namespace MovieDatabase.Repositories
         {
             var movies = _dbContext.Movies.Include(r => r.Ratings).Where(m => m.AverageScore > 0).OrderByDescending(m => m.AverageScore).ToList();
             return movies;
+        }
+
+        public void RemoveRating(int ratingId, int movieId)
+        {
+            var movie = GetMovieById(movieId);
+            var rating = movie.Ratings.FirstOrDefault(r => r.Id == ratingId);
+            movie.Ratings.Remove(rating);
+        }
+
+        public void UpdateMovie(Movie movie)
+        {
+                _dbContext.Movies.Update(movie);
+
         }
 
         private Director CheckDbIfDirectorExists(Director director)

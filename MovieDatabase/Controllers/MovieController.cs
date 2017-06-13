@@ -166,12 +166,11 @@ namespace MovieDatabase.Controllers
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-
                 model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
             }
             if (id != null)
             {
-                model.SelectedMovieId = (int)id;
+                model.SelectedMovieId = (int) id;
             }
             return View(model);
         }
@@ -182,8 +181,7 @@ namespace MovieDatabase.Controllers
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-
-                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
             }
             return View(model);
         }
@@ -220,7 +218,7 @@ namespace MovieDatabase.Controllers
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
-                model.Movies.Add(new SelectListItem() { Text = movie.Title, Value = movie.Id.ToString() });
+                model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
             }
 
             return View(model);
@@ -229,9 +227,61 @@ namespace MovieDatabase.Controllers
         [HttpPost]
         public IActionResult AddGenre(AddGenreViewModel viewModel)
         {
-            _movieRepository.AddGenre(new Genre{ GenreName = viewModel.SelectedGenre},viewModel.SelectedMovieId );
+            _movieRepository.AddGenre(new Genre {GenreName = viewModel.SelectedGenre}, viewModel.SelectedMovieId);
 
-            return RedirectToAction("MovieDetails", new { id = viewModel.SelectedMovieId });
+            return RedirectToAction("MovieDetails", new {id = viewModel.SelectedMovieId});
+        }
+
+        [HttpGet]
+        public IActionResult EditMovie(int id)
+        {
+            var movie = _movieRepository.GetMovieById(id);
+            var actors = new List<Actor>();
+            foreach (var movieActor in movie.MovieActors)
+            {
+                actors.Add(movieActor.Actor);
+            }
+            var model = new EditMovieViewModel
+            {
+                Actors = actors,
+                Ratings = movie.Ratings,
+                MovieId = movie.Id,
+                ProductionYear = movie.ProductionYear,
+                Title = movie.Title
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public void EditTitleAndProductionYear(string movieTitle, int movieProductionYear, int movieId)
+        {
+            var movie = _movieRepository.GetMovieById(movieId);
+            movie.Title = movieTitle;
+            movie.ProductionYear = movieProductionYear;
+
+            _movieRepository.UpdateMovie(movie);
+            _movieRepository.SaveData();
+        }
+
+        [HttpPost]
+        public void RemoveActor(int movieId, int actorId)
+        {
+            var movie = _movieRepository.GetMovieById(movieId);
+            var actor = movie.MovieActors.FirstOrDefault(ma => ma.ActorId == actorId && ma.MovieId == movieId);
+            if (actor != null)
+            {
+                movie.MovieActors.Remove(actor);
+                _movieRepository.UpdateMovie(movie);
+                _movieRepository.SaveData();
+            }
+        }
+
+        [HttpPost]
+        public void RemoveRating(int movieId, int ratingId)
+        {
+            _movieRepository.RemoveRating(ratingId, movieId);
+            _movieRepository.SaveData();
         }
     }
 }

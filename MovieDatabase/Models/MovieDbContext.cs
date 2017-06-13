@@ -9,6 +9,12 @@ namespace MovieDatabase.Models
 {
     public class MovieDbContext : IdentityDbContext<IdentityUser>
     {
+
+        public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
+        {
+
+        }
+
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Director> Directors { get; set; }
         public DbSet<Movie> Movies { get; set; }
@@ -19,9 +25,7 @@ namespace MovieDatabase.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(
-            //    "Server = (localdb)\\mssqllocaldb; Database = MovieDatabase; Trusted_Connection = True; ");
-            optionsBuilder.UseSqlServer(
+           optionsBuilder.UseSqlServer(
                 "Server=cullbranddb.database.windows.net,1433;Initial Catalog=MovieDatabase;Persist Security Info=False;User " + 
                 "ID=sebastian;Password=Password123LOL;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }

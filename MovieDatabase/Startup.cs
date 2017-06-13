@@ -44,14 +44,15 @@ namespace MovieDatabase
                 .AddEntityFrameworkStores<MovieDbContext>();
 
 
-            services.AddSingleton<IActorRepository, ActorRepository>();
+            services.AddTransient<IActorRepository, ActorRepository>();
             services.AddSingleton<IDirectorRepository, DirectorRepository>();
-            services.AddSingleton<IMovieRepository, MovieRepository>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddMvc();
 
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            ILoggerFactory loggerFactory, MovieDbContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -62,10 +63,10 @@ namespace MovieDatabase
                 app.UseBrowserLink();
             }
 
+
             app.UseIdentity();
 
             app.UseStaticFiles();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

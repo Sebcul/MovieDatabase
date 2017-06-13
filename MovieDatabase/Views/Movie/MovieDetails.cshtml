@@ -1,17 +1,31 @@
 ﻿@model MovieViewModel
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<IdentityUser> SignInManager
+
 
 <div class="container">
+
     <ul class="nav marginbottom25">
         <h2>
             @Model.Title (@Model.ProductionYear)
             @if (!double.IsNaN(Model.AverageScore))
             {
-                <img src="~/images/star.png" class="marginleft25" width="33" height="33" /> @Model.AverageScore
-            }</h2>
+                <img src="~/images/star.png" class="marginleft25" width="33" height="33" />
+                @Model.AverageScore.ToString("0.##")
+                ;
+            }
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="paddingleft30" href="@Url.Action("EditMovie", new {id = Model.MovieId})">Edit movie</a>
+            }
+        </h2>
         <h3 class="marginbottom25">
             @foreach (var genre in Model.Genres)
             {
-                @genre.GenreName;
+                @genre.GenreName
+                ;
                 if (Model.Genres.Count() > 1 && genre != Model.Genres.Last())
                 {
                     <span> |</span>
@@ -49,5 +63,5 @@
         </table>
 
     }
-    <h4 class="margintop25"><a href="@Url.Action("AddRating", new { id = Model.MovieId })">Add rating</a></h4>
+    <h4 class="margintop25"><a href="@Url.Action("AddRating", new {id = Model.MovieId})">Add rating</a></h4>
 </div>

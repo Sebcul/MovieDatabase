@@ -19,7 +19,7 @@
                         <tr>
                             <td class="col-xs-1">@(i + 1).</td>
                             <td><a href="@Url.Action("MovieDetails", new {id = @Model.ElementAt(i).Id})"><h5>@Model.ElementAt(i).Title</h5></a></td>
-                    <td><img src="~/images/star.png" width="20" height="20" />@Model.ElementAt(i).AverageScore</td>
+                    <td><img src="~/images/star.png" width="20" height="20" />@Model.ElementAt(i).AverageScore.ToString("0.##")  </td>
                         </tr>
                             }
 
