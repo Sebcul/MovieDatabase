@@ -29,6 +29,7 @@ namespace MovieDatabase.Controllers
 
             var model = new DirectorViewModel()
             {
+                DirectorId = director.Id,
                 Name = director.Name,
                 DateOfBirth = director.DateOfBirth,
                 DirectedMovies = movies
@@ -47,6 +48,34 @@ namespace MovieDatabase.Controllers
         {
             var model = _directorRepository.GetAllDirectors().Where(a => a.Name.ToLower().Contains(s.ToLower()));
             return View("DirectorSearch", model);
+        }
+
+        [HttpGet]
+        public IActionResult EditDirector(int id)
+        {
+            var director = _directorRepository.GetDirectorById(id);
+
+            var model = new DirectorViewModel()
+            {
+                DirectorId = id,
+                DateOfBirth = director.DateOfBirth,
+                Name = director.Name
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditDirector(DirectorViewModel viewModel)
+        {
+            var director = _directorRepository.GetDirectorById((int)viewModel.DirectorId);
+
+            director.Name = viewModel.Name;
+            director.DateOfBirth = viewModel.DateOfBirth;
+
+            _directorRepository.UpdateDirector(director);
+            _directorRepository.SaveData();
+
+            return RedirectToAction("DirectorDetails", new { id = viewModel.DirectorId });
         }
     }
 }

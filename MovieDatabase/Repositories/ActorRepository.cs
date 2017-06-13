@@ -53,6 +53,11 @@ namespace MovieDatabase.Repositories
             return movies;
         }
 
+        public void UpdateActor(Actor actor)
+        {
+            _dbContext.Actors.Update(actor);
+        }
+
         public Actor GetActorById(int id)
         {
             return _dbContext.Actors.First(a => a.Id == id);
@@ -65,6 +70,11 @@ namespace MovieDatabase.Repositories
                                                       && a.DateOfBirth == dateOfBirth);
 
             return actorInDb != null;
+        }
+
+        public void SaveData()
+        {
+            _dbContext.SaveChanges();
         }
 
         private bool IsActorInMovie(Actor actor, Movie movie)

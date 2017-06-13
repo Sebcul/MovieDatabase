@@ -22,9 +22,19 @@ namespace MovieDatabase.Repositories
             return _dbContext.Movies.Where(d => d.DirectorId == id);
         }
 
+        public void UpdateDirector(Director director)
+        {
+            _dbContext.Directors.Update(director);
+        }
+
         public Director GetDirectorById(int id)
         {
             return _dbContext.Directors.First(a => a.Id == id);
+        }
+
+        public void SaveData()
+        {
+            _dbContext.SaveChanges();
         }
 
 

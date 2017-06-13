@@ -32,6 +32,7 @@ namespace MovieDatabase.Controllers
 
             var model = new ActorViewModel
             {
+                ActorId = actor.Id,
                 Name = actor.Name,
                 DateOfBirth = actor.DateOfBirth,
                 Movies = movies
@@ -51,6 +52,33 @@ namespace MovieDatabase.Controllers
         {
             var model = _actorRepository.GetAllActors().Where(a => a.Name.ToLower().Contains(s.ToLower()));
             return View("ActorSearch", model);
+        }
+
+        [HttpGet]
+        public IActionResult EditActor(int id)
+        {
+            var actor = _actorRepository.GetActorById(id);
+            var model = new ActorViewModel
+            {
+                ActorId = id,
+                DateOfBirth = actor.DateOfBirth,
+                Name = actor.Name
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditActor(ActorViewModel viewModel)
+        {
+            var actor = _actorRepository.GetActorById((int)viewModel.ActorId);
+
+            actor.Name = viewModel.Name;
+            actor.DateOfBirth = viewModel.DateOfBirth;
+
+            _actorRepository.UpdateActor(actor);
+            _actorRepository.SaveData();
+
+            return RedirectToAction("ActorDetails", new {id = viewModel.ActorId});
         }
     }
 }

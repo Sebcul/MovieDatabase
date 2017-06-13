@@ -11,6 +11,8 @@ namespace MovieDatabase.Repositories
         IEnumerable<Actor> GetAllActors();
         void AddActorToMovie(Actor actor, Movie movie);
         IEnumerable<Movie> GetMoviesForActor(int id);
+        void UpdateActor(Actor actor);
+        void SaveData();
         Actor GetActorById(int id);
     }
 }

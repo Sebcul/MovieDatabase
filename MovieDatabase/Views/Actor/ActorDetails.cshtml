@@ -1,13 +1,23 @@
 ﻿@model ActorViewModel
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<IdentityUser> SignInManager
 
 <div class="container">
-    <ul class="nav marginbottom25">
-        <h2>@Model.Name, @Model.DateOfBirth.ToString("d")</h2>
-        <br />
-        <h4 class="underline">Movies acted</h4>
-        @foreach (var movie in Model.Movies)
+
+    <h2>
+        @Model.Name, @Model.DateOfBirth.ToString("d")
+        @if (SignInManager.IsSignedIn(User))
         {
-            <li>@movie.Title, @movie.ProductionYear</li>
+            <a class="paddingleft30" href="@Url.Action("EditActor", new {id = Model.ActorId})">Edit actor</a>
         }
-    </ul>
+    </h2>
+    <br/>
+    <h4 class="underline">Movies acted</h4>
+    @foreach (var movie in Model.Movies)
+    {
+        <span>@movie.Title, @movie.ProductionYear</span>
+    }
 </div>
+

@@ -1,9 +1,8 @@
 ﻿@model LoginViewModel
 
-<h2>Log in to add movies</h2>
+<h2 class="marginbottom25">Log in to add and edit movies</h2>
 
 <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
-    <h4>Enter your details below</h4>
     <hr />
     <input type="hidden" asp-for="ReturnUrl" />
     <div asp-validation-summary="All" class="text-danger"></div>
