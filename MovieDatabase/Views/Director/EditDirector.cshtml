@@ -1,27 +1,39 @@
 ﻿@model DirectorViewModel
 
-<h3>Edit director</h3>
-<div class="margintop25 form-group">
-    @using (Html.BeginForm("EditDirector", "Director"))
-    {
-        <div>@Html.ValidationSummary()</div>
-        <div>
-            @Html.HiddenFor(m => m.DirectorId)
-            <table>
-                <tr>
-                    <td>@Html.LabelFor(m => m.Name)</td>
-                    <td>@Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control form-group" } })</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(m => m.DateOfBirth)</td>
-                    <td>@Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control form-group" } })</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Save" class="btn btn-default marginbottom25" /></td>
-                </tr>
-            </table>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
-        </div>
-    }
-</div>
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h3>Edit director</h3>
+    <div class="margintop25 form-group">
+        @using (Html.BeginForm("EditDirector", "Director"))
+        {
+            <div>@Html.ValidationSummary()</div>
+            <div>
+                @Html.HiddenFor(m => m.DirectorId)
+                <table>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.Name)</td>
+                        <td>@Html.EditorFor(m => m.Name, new {htmlAttributes = new {@class = "form-control form-group"}})</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.DateOfBirth)</td>
+                        <td>@Html.EditorFor(m => m.DateOfBirth, new {htmlAttributes = new {@class = "form-control form-group"}})</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Save" class="btn btn-default marginbottom25"/></td>
+                    </tr>
+                </table>
+
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h2>Sorry, this page is for admins only.</h2>
+}

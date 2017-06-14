@@ -1,24 +1,35 @@
 ﻿@model AddGenreViewModel
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
-@using (Html.BeginForm("AddGenre", "Movie", FormMethod.Post))
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
 {
-    <div>@Html.ValidationSummary()</div>
-    <div class="container paddingcenterize">
-        <table>
-            <tr>
-                <td>@Html.LabelFor(m => m.Movies)</td>
-                <td>@Html.LabelFor(m => m.Genres)</td>
-            </tr>
-            <tr class="trheightreview">
-                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
-                <td>@Html.DropDownListFor(n => n.SelectedGenre, Model.Genres)</td>
-            </tr>
-            <tr class="trheightreview">
-                <td>
-                    <input type="submit" value="Add" class="btn btn-default marginbottom25" />
-                </td>
-            </tr>
-        </table>
+    using (Html.BeginForm("AddGenre", "Movie", FormMethod.Post))
+    {
+        <div>@Html.ValidationSummary()</div>
+        <div class="container paddingcenterize">
+            <table>
+                <tr>
+                    <td>@Html.LabelFor(m => m.Movies)</td>
+                    <td>@Html.LabelFor(m => m.Genres)</td>
+                </tr>
+                <tr class="trheightreview">
+                    <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
+                    <td>@Html.DropDownListFor(n => n.SelectedGenre, Model.Genres)</td>
+                </tr>
+                <tr class="trheightreview">
+                    <td>
+                        <input type="submit" value="Add" class="btn btn-default marginbottom25"/>
+                    </td>
+                </tr>
+            </table>
 
-    </div>
+        </div>
+    }
+}
+else
+{
+    <h2>Sorry, this page is for admins only.</h2>
 }

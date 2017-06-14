@@ -1,27 +1,39 @@
 ﻿@model AddActorViewModel
 
-@using (Html.BeginForm("AddActors", "Movie"))
-{
-    <div>@Html.ValidationSummary()</div>
-    <div>
-        <table>
-            <tr>
-                <td>@Html.LabelFor(m => m.Movies)</td>
-                <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.ActorName)</td>
-                <td>@Html.EditorFor(m => m.ActorName, new { htmlAttributes = new { @class = "form-control" } })</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(m => m.ActorDateOfBirth)</td>
-                <td>@Html.EditorFor(m => m.ActorDateOfBirth, new {htmlAttributes = new {@class = "form-control"}})</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Add" class="btn btn-default marginbottom25"/></td>
-            </tr>
-        </table>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
-    </div>
+@inject SignInManager<IdentityUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+using (Html.BeginForm("AddActors", "Movie"))
+ {
+     <div>@Html.ValidationSummary()</div>
+     <div>
+         <table>
+             <tr>
+                 <td>@Html.LabelFor(m => m.Movies)</td>
+                 <td>@Html.DropDownListFor(n => n.SelectedMovieId, Model.Movies)</td>
+             </tr>
+             <tr>
+                 <td>@Html.LabelFor(m => m.ActorName)</td>
+                 <td>@Html.EditorFor(m => m.ActorName, new {htmlAttributes = new {@class = "form-control"}})</td>
+             </tr>
+             <tr>
+                 <td>@Html.LabelFor(m => m.ActorDateOfBirth)</td>
+                 <td>@Html.EditorFor(m => m.ActorDateOfBirth, new {htmlAttributes = new {@class = "form-control"}})</td>
+             </tr>
+             <tr>
+                 <td></td>
+                 <td><input type="submit" value="Add" class="btn btn-default marginbottom25"/></td>
+             </tr>
+         </table>
+
+     </div>
+    }
+}
+else
+{
+    <h2>Sorry, this page is for admins only.</h2>
 }
