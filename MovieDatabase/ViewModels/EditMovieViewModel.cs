@@ -13,5 +13,6 @@ namespace MovieDatabase.ViewModels
         public int ProductionYear { get; set; }
         public List<Actor> Actors { get; set; }
         public IEnumerable<Rating> Ratings { get; set; }
+        public IEnumerable<Genre> Genres { get; set; }
     }
 }

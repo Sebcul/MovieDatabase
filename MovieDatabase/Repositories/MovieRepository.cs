@@ -49,7 +49,7 @@ namespace MovieDatabase.Repositories
 
         public void AddGenre(Genre genre, int movieId)
         {
-            genre = CheckDbIfGenreExists(genre);
+            //genre = CheckDbIfGenreExists(genre);
 
             var movie = GetMovieById(movieId);
             if (IsGenreOnMovie(movie, genre.GenreName))
@@ -71,11 +71,18 @@ namespace MovieDatabase.Repositories
             return movies;
         }
 
-        public void RemoveRating(int ratingId, int movieId)
+        public void RemoveRatingFromMovie(int ratingId, int movieId)
         {
             var movie = GetMovieById(movieId);
             var rating = movie.Ratings.FirstOrDefault(r => r.Id == ratingId);
             movie.Ratings.Remove(rating);
+        }
+
+        public void RemoveGenreFromMovie(int genreId, int movieId)
+        {
+            var movie = GetMovieById(movieId);
+            var genre = movie.Genres.FirstOrDefault(g => g.Id == genreId);
+            movie.Genres.Remove(genre);
         }
 
         public void UpdateMovie(Movie movie)

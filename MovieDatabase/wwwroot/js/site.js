@@ -47,6 +47,19 @@ $("#removeActorButton").click(function () {
     $('#movieActors option[value="' + value + '"]').remove();
 });
 
+$("#removeGenreButton").click(function () {
+    $.ajax({
+        method: 'POST',
+        url: '/Movie/RemoveGenre',
+        data: {
+            movieId: $("#movieId").val(),
+            genreId: $("#movieGenres").val()
+        }
+    });
+    var value = $("#movieGenres").val();
+    $('#movieGenres option[value="' + value + '"]').remove();
+});
+
 $(".removeRatingButton").click(function () {
     var id = $(this).attr('data-id');
     $.ajax({
@@ -60,3 +73,5 @@ $(".removeRatingButton").click(function () {
 
     $("#reviewBox" + id).last().addClass("hidden");
 });
+
+$('[data-toggle="confirmation"]').confirmation();

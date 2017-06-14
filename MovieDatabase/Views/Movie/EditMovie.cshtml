@@ -19,15 +19,28 @@
         <input type="text" value="@Model.ProductionYear" id="movieProductionYear" class="form-control"/>
     </div>
 
-    <div>
-        <h3>Actors</h3>
-        <select id="movieActors" name="movieActors">
-            @foreach (var actor in Model.Actors)
-            {
-                <option value="@actor.Id">@actor.Name</option>
-            }
-        </select>
-        <input type="button" id="removeActorButton" value="Remove" class="btn btn-default btn-sm"/>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Actors</h3>
+            <select id="movieActors" name="movieActors">
+                @foreach (var actor in Model.Actors)
+                {
+                    <option value="@actor.Id">@actor.Name</option>
+                }
+            </select>
+            <input type="button" id="removeActorButton" value="Remove" class="btn btn-default btn-sm"/>
+        </div>
+        
+        <div class="col-md-3">
+            <h3>Genres</h3>
+            <select id="movieGenres" name="movieGenres">
+                @foreach (var genre in Model.Genres)
+                {
+                    <option value="@genre.Id">@genre.GenreName</option>
+                }
+            </select>
+            <input type="button" id="removeGenreButton" value="Remove" class="btn btn-default btn-sm"/>
+        </div>
     </div>
 
     <div class="margintop25">

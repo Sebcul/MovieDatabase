@@ -63,7 +63,9 @@
                         <a asp-controller="Director" asp-action="ListAll">List all directors</a>
                     </li>
                 </ul>
+
             </li>
+
             <li>
                 <a asp-controller="Movie" asp-action="TopList"><img src="~/images/list.png" width="20" height="20"/> Top movies</a>
             </li>
@@ -83,8 +85,7 @@
         </div>
 
         <ul class="nav navbar-nav navbar-right paddingright30">
-
-            @await Html.PartialAsync("_LoginPartial")
+            <li class="marginleft10">@await Html.PartialAsync("_LoginPartial")</li>
         </ul>
     </div>
 </nav>
@@ -100,6 +101,7 @@
 <environment names="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/bootstrap-confirmation.min.js"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -115,6 +117,7 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
     </script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
+    <script src="~/js/bootstrap-confirmation.min.js"></script>
 </environment>
 
 @RenderSection("Scripts", required: false)

@@ -14,7 +14,8 @@ namespace MovieDatabase.Repositories
         void AddGenre(Genre genre, int movieId);
         void DeleteMovie(int id);
         void UpdateMovie(Movie movie);
-        void RemoveRating(int ratingId, int movieId);
+        void RemoveRatingFromMovie(int ratingId, int movieId);
+        void RemoveGenreFromMovie(int genreId, int movieId);
         void SaveData();
     }
 }

@@ -140,8 +140,12 @@ namespace MovieDatabase.Controllers
         [HttpPost]
         public IActionResult DeleteMovie(DeleteMovieViewModel viewModel)
         {
-            _movieRepository.DeleteMovie(viewModel.SelectedMovieId);
-            _movieRepository.SaveData();
+            if (viewModel.SelectedMovieId != 0)
+            {
+                _movieRepository.DeleteMovie(viewModel.SelectedMovieId);
+                _movieRepository.SaveData();
+            }
+
 
             var model = new DeleteMovieViewModel();
             foreach (var movie in _movieRepository.GetAllMovies())
@@ -228,7 +232,7 @@ namespace MovieDatabase.Controllers
         public IActionResult AddGenre(AddGenreViewModel viewModel)
         {
             _movieRepository.AddGenre(new Genre {GenreName = viewModel.SelectedGenre}, viewModel.SelectedMovieId);
-
+            _movieRepository.SaveData();
             return RedirectToAction("MovieDetails", new {id = viewModel.SelectedMovieId});
         }
 
@@ -247,7 +251,8 @@ namespace MovieDatabase.Controllers
                 Ratings = movie.Ratings,
                 MovieId = movie.Id,
                 ProductionYear = movie.ProductionYear,
-                Title = movie.Title
+                Title = movie.Title,
+                Genres = movie.Genres
             };
 
             return View(model);
@@ -280,7 +285,14 @@ namespace MovieDatabase.Controllers
         [HttpPost]
         public void RemoveRating(int movieId, int ratingId)
         {
-            _movieRepository.RemoveRating(ratingId, movieId);
+            _movieRepository.RemoveRatingFromMovie(ratingId, movieId);
+            _movieRepository.SaveData();
+        }
+
+        [HttpPost]
+        public void RemoveGenre(int movieId, int genreId)
+        {
+            _movieRepository.RemoveGenreFromMovie(genreId, movieId);
             _movieRepository.SaveData();
         }
     }

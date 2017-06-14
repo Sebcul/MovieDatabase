@@ -6,10 +6,10 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-using (Html.BeginForm("DeleteMovie", "Movie", FormMethod.Post, new {onsubmit = "return ValidateDelete();"}))
- {
+    using (Html.BeginForm("DeleteMovie", "Movie"))
+    {
      <div>@Html.ValidationSummary()</div>
-     <div>
+     <div class="margintop25">
          <table>
              <tr>
                  <td>@Html.LabelFor(m => m.Movies)</td>
@@ -17,7 +17,7 @@ using (Html.BeginForm("DeleteMovie", "Movie", FormMethod.Post, new {onsubmit = "
              </tr>
              <tr>
                  <td></td>
-                 <td><input type="submit" value="Delete" class="btn btn-default marginbottom25"/></td>
+                 <td><input type="submit" value="Delete" data-toggle="confirmation" class="btn btn-default marginbottom25" /></td>
 
              </tr>
          </table>
