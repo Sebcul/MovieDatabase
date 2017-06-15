@@ -14,7 +14,6 @@
             {
                 <img src="~/images/star.png" class="marginleft25" width="33" height="33" />
                 @Model.AverageScore.ToString("0.##")
-                ;
             }
             @if (SignInManager.IsSignedIn(User))
             {
@@ -25,7 +24,7 @@
             @foreach (var genre in Model.Genres)
             {
                 @genre.GenreName
-                ;
+
                 if (Model.Genres.Count() > 1 && genre != Model.Genres.Last())
                 {
                     <span> |</span>

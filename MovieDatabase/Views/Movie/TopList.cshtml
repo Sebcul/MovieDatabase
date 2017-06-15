@@ -13,15 +13,23 @@
                         <col class="col-md-2">
                     </colgroup>
                     <tbody>
-
-                        @for (int i = 0; i < @Model.Count(); i++)
-                        {
+                    @{
+                        int topListLength = Model.Count() > 10 ? 10 : Model.Count();
+                    }
+                    @for (int i = 0; i < topListLength; i++)
+                    {
                         <tr>
                             <td class="col-xs-1">@(i + 1).</td>
-                            <td><a href="@Url.Action("MovieDetails", new {id = @Model.ElementAt(i).Id})"><h5>@Model.ElementAt(i).Title</h5></a></td>
-                    <td><img src="~/images/star.png" width="20" height="20" />@Model.ElementAt(i).AverageScore.ToString("0.##")  </td>
+                            <td>
+                                <a href="@Url.Action("MovieDetails", new {id = @Model.ElementAt(i).Id})">
+                                    <h5>@Model.ElementAt(i).Title</h5>
+                                </a>
+                            </td>
+                            <td>
+                                <img src="~/images/star.png" width="20" height="20"/>@Model.ElementAt(i).AverageScore.ToString("0.##")
+                            </td>
                         </tr>
-                            }
+                    }
 
                     </tbody>
                 </table>

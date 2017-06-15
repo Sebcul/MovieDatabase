@@ -20,7 +20,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <h3>Actors</h3>
             <select id="movieActors" name="movieActors">
                 @foreach (var actor in Model.Actors)
@@ -31,7 +31,15 @@
             <input type="button" id="removeActorButton" value="Remove" class="btn btn-default btn-sm"/>
         </div>
         
+
         <div class="col-md-3">
+            <h3><a href="@Url.Action("AddActors", new {id = Model.MovieId})">Add actors</a></h3>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
             <h3>Genres</h3>
             <select id="movieGenres" name="movieGenres">
                 @foreach (var genre in Model.Genres)
@@ -40,6 +48,10 @@
                 }
             </select>
             <input type="button" id="removeGenreButton" value="Remove" class="btn btn-default btn-sm"/>
+        </div>
+
+        <div class="col-md-3">
+            <h3><a href="@Url.Action("AddGenre", new {id = Model.MovieId})">Add genre</a></h3>
         </div>
     </div>
 

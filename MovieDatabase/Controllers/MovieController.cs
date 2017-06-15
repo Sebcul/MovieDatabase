@@ -90,13 +90,17 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddActors()
+        public IActionResult AddActors(int? id)
         {
             var model = new AddActorViewModel();
             model.ActorDateOfBirth = null;
             foreach (var movie in _movieRepository.GetAllMovies())
             {
                 model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
+            }
+            if (id != null)
+            {
+                model.SelectedMovieId = (int)id;
             }
             return View(model);
         }
@@ -216,13 +220,17 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddGenre()
+        public IActionResult AddGenre(int? id)
         {
             var model = new AddGenreViewModel();
 
             foreach (var movie in _movieRepository.GetAllMovies())
             {
                 model.Movies.Add(new SelectListItem() {Text = movie.Title, Value = movie.Id.ToString()});
+            }
+            if (id != null)
+            {
+                model.SelectedMovieId = (int)id;
             }
 
             return View(model);
