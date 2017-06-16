@@ -6,7 +6,6 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 <div class="container">
-
     <h2>
         @Model.Name, @Model.DateOfBirth.ToString("d")
         @if (SignInManager.IsSignedIn(User))

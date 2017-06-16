@@ -66,7 +66,7 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMovie(AddMovieViewModel model)
+        public IActionResult AddMovie(AddMovieViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -74,19 +74,20 @@ namespace MovieDatabase.Controllers
                 {
                     Director = new Director
                     {
-                        DateOfBirth = Convert.ToDateTime(model.DirectorDoB),
-                        Name = model.DirectorName
+                        DateOfBirth = Convert.ToDateTime(viewModel.DirectorDoB),
+                        Name = viewModel.DirectorName
                     },
-                    Title = model.Title,
-                    ProductionYear = Convert.ToInt32(model.ProductionYear)
+                    Title = viewModel.Title,
+                    ProductionYear = Convert.ToInt32(viewModel.ProductionYear)
                 };
-                var genre = _movieRepository.CheckDbIfGenreExists(new Genre {GenreName = model.SelectedGenre});
+                var genre = _movieRepository.CheckDbIfGenreExists(new Genre {GenreName = viewModel.SelectedGenre});
                 movie.Genres.Add(genre);
                 _movieRepository.AddMovie(movie);
                 _movieRepository.SaveData();
                 return RedirectToAction("MovieDetails", new {id = movie.Id});
             }
-            return View();
+            var model = new AddMovieViewModel();
+            return View(model);
         }
 
         [HttpGet]

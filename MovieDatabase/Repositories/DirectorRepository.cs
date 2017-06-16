@@ -27,6 +27,15 @@ namespace MovieDatabase.Repositories
             _dbContext.Directors.Update(director);
         }
 
+        public void RemoveDirector(int id)
+        {
+            if (!IsDirectorInAnyMovie(id))
+            {
+                var director = _dbContext.Directors.FirstOrDefault(d => d.Id == id);
+                _dbContext.Directors.Remove(director);
+            }
+        }
+
         public Director GetDirectorById(int id)
         {
             return _dbContext.Directors.First(a => a.Id == id);
@@ -37,6 +46,9 @@ namespace MovieDatabase.Repositories
             _dbContext.SaveChanges();
         }
 
-
+        public bool IsDirectorInAnyMovie(int id)
+        {
+            return _dbContext.Movies.Any(d => d.DirectorId == id);
+        }
     }
 }

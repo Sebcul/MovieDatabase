@@ -6,7 +6,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <h3>Edit actor</h3>
+    <h3><span>@ViewBag.ErrorMessage</span></h3>
+    <div class ="row">
+        <h3 class="col-md-3">Edit actor</h3>
+        <h3><a href="@Url.Action("RemoveActor", new { id = Model.ActorId })">Remove</a></h3>
+    </div>
     <div class="margintop25 form-group">
         @using (Html.BeginForm("EditActor", "Actor"))
         {

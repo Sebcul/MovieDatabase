@@ -34,6 +34,7 @@ namespace MovieDatabase.Controllers
                 DateOfBirth = director.DateOfBirth,
                 DirectedMovies = movies
             };
+
             return View(model);
         }
 
@@ -51,7 +52,7 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditDirector(int id)
+        public IActionResult EditDirector(int id, int? errorId)
         {
             var director = _directorRepository.GetDirectorById(id);
 
@@ -61,6 +62,10 @@ namespace MovieDatabase.Controllers
                 DateOfBirth = director.DateOfBirth,
                 Name = director.Name
             };
+            if (errorId == 1)
+            {
+                ViewBag.ErrorMessage = "Can't remove a director that is in an existing movie.";
+            }
             return View(model);
         }
 
@@ -76,6 +81,21 @@ namespace MovieDatabase.Controllers
             _directorRepository.SaveData();
 
             return RedirectToAction("DirectorDetails", new { id = viewModel.DirectorId });
+        }
+
+        [HttpGet]
+        public IActionResult RemoveDirector(int id)
+        {
+            if (!_directorRepository.IsDirectorInAnyMovie(id))
+            {
+                _directorRepository.RemoveDirector(id);
+                _directorRepository.SaveData();
+                return RedirectToAction("ListAll");
+            }
+            else
+            {
+                return RedirectToAction("EditDirector", new { id = id, errorId = 1 });
+            }
         }
     }
 }

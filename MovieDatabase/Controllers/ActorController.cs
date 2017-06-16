@@ -55,7 +55,7 @@ namespace MovieDatabase.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditActor(int id)
+        public IActionResult EditActor(int id, int? errorId)
         {
             var actor = _actorRepository.GetActorById(id);
             var model = new ActorViewModel
@@ -64,6 +64,10 @@ namespace MovieDatabase.Controllers
                 DateOfBirth = actor.DateOfBirth,
                 Name = actor.Name
             };
+            if (errorId == 1)
+            {
+                ViewBag.ErrorMessage = "Can't remove an actor that is in an existing movie.";
+            }
             return View(model);
         }
 
@@ -79,6 +83,21 @@ namespace MovieDatabase.Controllers
             _actorRepository.SaveData();
 
             return RedirectToAction("ActorDetails", new {id = viewModel.ActorId});
+        }
+
+        [HttpGet]
+        public IActionResult RemoveActor(int id)
+        {
+            if (!_actorRepository.IsActorInAnyMovie(id))
+            {
+                _actorRepository.RemoveActor(id);
+                _actorRepository.SaveData();
+                return RedirectToAction("ListAll");
+            }
+            else
+            {
+                return RedirectToAction("EditActor", new { id = id, errorId = 1 });
+            }
         }
     }
 }

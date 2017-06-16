@@ -22,6 +22,7 @@ namespace MovieDatabase.ViewModels
 
         [Required]
         [Display(Name = "Title")]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "Title must be 2-100 characters.")]
         public string Title { get; set; }
 
         [Required]
