@@ -7,4 +7,4 @@ TODO:<br/>
 <strike>Add genre to movies 1-N<br/></strike>
 <strike>Login for admins</strike><br/>
 <strike>Edit functionality for admins</strike><br/>
-Validation for edit
+<strike>Validation for edit</strike>
