@@ -61,11 +61,8 @@ namespace MovieDatabase.Repositories
 
         public void RemoveActor(int id)
         {
-            if (!IsActorInAnyMovie(id))
-            {
                 var actor = _dbContext.Actors.FirstOrDefault(d => d.Id == id);
                 _dbContext.Actors.Remove(actor);
-            }
         }
 
         public Actor GetActorById(int id)

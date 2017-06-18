@@ -29,11 +29,8 @@ namespace MovieDatabase.Repositories
 
         public void RemoveDirector(int id)
         {
-            if (!IsDirectorInAnyMovie(id))
-            {
                 var director = _dbContext.Directors.FirstOrDefault(d => d.Id == id);
                 _dbContext.Directors.Remove(director);
-            }
         }
 
         public Director GetDirectorById(int id)

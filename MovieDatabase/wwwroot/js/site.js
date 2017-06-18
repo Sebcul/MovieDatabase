@@ -75,3 +75,4 @@ $(".removeRatingButton").click(function () {
 });
 
 $('[data-toggle="confirmation"]').confirmation();
+

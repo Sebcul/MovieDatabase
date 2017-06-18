@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\js\weatherapi.js" />
     <Content Include="wwwroot\Test.html" />
   </ItemGroup>
   <ItemGroup>

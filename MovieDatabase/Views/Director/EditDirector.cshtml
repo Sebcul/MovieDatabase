@@ -10,7 +10,7 @@
     <h3><span>@ViewBag.ErrorMessage</span></h3>
     <div class ="row">
     <h3 class="col-md-3">Edit director</h3>
-    <h3><a href="@Url.Action("RemoveDirector", new { id = Model.DirectorId })">Remove</a></h3>
+    <h3><a data-toggle="confirmation" href="@Url.Action("RemoveDirector", new { id = Model.DirectorId })">Remove</a></h3>
     </div>
     <div class="margintop25 form-group">
         @using (Html.BeginForm("EditDirector", "Director"))
